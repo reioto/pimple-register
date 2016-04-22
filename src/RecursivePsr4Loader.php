@@ -30,7 +30,7 @@ class RecursivePsr4Loader implements LoaderInterface
     { 
         $pre = $this->_prefix;
 
-        if (substr($pre, 1) !== '\\') {
+        if (substr($pre, 0, 1) !== '\\') {
             $pre = '\\' . $pre;
         }
 

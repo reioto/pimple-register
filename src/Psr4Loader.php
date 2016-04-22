@@ -29,8 +29,7 @@ class Psr4Loader implements LoaderInterface
     protected function getBaseNameSpace()
     { 
         $pre = $this->_prefix;
-
-        if (substr($pre, 1) !== '\\') {
+        if (substr($pre, 0, 1) !== '\\') {
             $pre = '\\' . $pre;
         }
 

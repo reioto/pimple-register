@@ -15,7 +15,7 @@ class Psr4Loader implements LoaderInterface
     function __construct($dir, $prefix)
     {
         $this->_baseDir = new \SplFileInfo($dir);
-        $this->_prefix = $prefix;
+        $this->_setBaseNameSpace($prefix);
     }
 
     /**
@@ -26,9 +26,14 @@ class Psr4Loader implements LoaderInterface
     /**
      * @return string
      */
-    protected function getBaseNameSpace()
+    public function getBaseNameSpace() { return $this->_prefix; }
+
+    /**
+     * @param string $pre
+     * @return $this
+     */
+    private function _setBaseNameSpace($pre)
     { 
-        $pre = $this->_prefix;
         if (substr($pre, 0, 1) !== '\\') {
             $pre = '\\' . $pre;
         }
@@ -37,7 +42,9 @@ class Psr4Loader implements LoaderInterface
             $pre .= '\\';
         }
 
-        return $pre;
+        $this->_prefix = $pre;
+
+        return $this;
     }
 
     function register(Container $container)

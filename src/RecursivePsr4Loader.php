@@ -15,7 +15,7 @@ class RecursivePsr4Loader implements LoaderInterface
     function __construct($dir, $prefix)
     {
         $this->_baseDir = new \SplFileInfo($dir);
-        $this->_prefix = $prefix;
+        $this->_setBaseNameSpace($prefix);
     }
 
     /**
@@ -24,12 +24,11 @@ class RecursivePsr4Loader implements LoaderInterface
     protected function getBaseDir() { return $this->_baseDir; }
 
     /**
-     * @return string
+     * @param string $pre
+     * @return $this
      */
-    protected function getBaseNameSpace()
+    private function _setBaseNameSpace($pre)
     { 
-        $pre = $this->_prefix;
-
         if (substr($pre, 0, 1) !== '\\') {
             $pre = '\\' . $pre;
         }
@@ -38,8 +37,16 @@ class RecursivePsr4Loader implements LoaderInterface
             $pre .= '\\';
         }
 
-        return $pre;
+        $this->_prefix = $pre;
+
+        return $this;
     }
+
+    /**
+     * @return string
+     */
+    public function getBaseNameSpace() { return $this->_prefix; }
+
 
     function register(Container $container)
     {

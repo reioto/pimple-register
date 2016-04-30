@@ -1,4 +1,6 @@
 # pimple-register
+[![Build Status](https://travis-ci.org/reioto/pimple-register.svg?branch=master)](https://travis-ci.org/reioto/pimple-register)
+
 
 PimpleRegister is Loader for Pimple\\ServiceProviderInterface
 
